@@ -1,0 +1,2 @@
+search_api_endpoint: 'http://systembevakningsagenten.se/api/json/1.0/searchProduct.json'
+items_per_page: 5

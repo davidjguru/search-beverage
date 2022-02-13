@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present search form results.
+ *
+ * Available variables:
+ * - total: Number of results returned by the search.
+ * - search_results: Search results table.
+ * - pagination: Search results.
+ *
+ * @see template_preprocess_search_form_results()
+ *
+ */
+#}
+
+{% if total %}
+  {{ 'Total results: '|t ~ total }}
+{% endif %}
+
+{{ search_results }}
+
+{{ pagination }}

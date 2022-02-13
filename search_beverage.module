@@ -1,0 +1,61 @@
+<?php
+
+/**
+* Implements hook_theme().
+*/
+function search_beverage_theme($existing, $type, $theme, $path) {
+  return [
+    'search_form_results' => [
+      'variables' => [
+        'items' => [],
+        'page' => NULL,
+        'items_per_page' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function template_preprocess_search_form_results(array &$variables) {
+  $items = $variables['items'];
+  $total = count($items);
+  $page = $variables['page'];
+  $items_per_page = $variables['items_per_page'];
+  $current_page_items = [];
+
+  if ($total) {
+    /** @var \Drupal\search_beverage\PaginationInterface $pager */
+    $pager = \Drupal::service('search_beverage.pagination')
+      ->init($items, $items_per_page);
+    $current_page_items = $pager->currentPageItems($page);
+    $variables['pagination'] = [
+      '#type' => 'pager',
+    ];
+    $variables['total'] = $total;
+  }
+
+  $rows = [];
+  foreach ($current_page_items as $item) {
+    $rows[] = [
+      $item['name'],
+      $item['type'],
+      $item['producer'],
+      $item['country'],
+    ];
+  }
+
+  $variables['search_results'] = [
+    '#theme' => 'table',
+    '#header' => [
+      t('Name'),
+      t('Type'),
+      t('Producer'),
+      t('Country'),
+    ],
+    '#rows' => $rows,
+    '#empty' => t('No results found. Try different search term.'),
+  ];
+
+}

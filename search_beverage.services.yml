@@ -1,0 +1,5 @@
+services:
+  search_beverage.pagination:
+    class: '\Drupal\search_beverage\Pagination'
+    arguments:
+      - '@pager.manager'

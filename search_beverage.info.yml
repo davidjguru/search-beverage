@@ -1,0 +1,6 @@
+name: Search beverage
+description: Form for searching beverages
+package: Custom
+
+type: module
+core_version_requirement: ^9.2

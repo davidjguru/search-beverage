@@ -1,0 +1,13 @@
+search_beverage.form:
+  path: '/search-beverage'
+  defaults:
+    _title: 'Search beverages'
+    _form: '\Drupal\search_beverage\Form\SearchForm'
+  requirements:
+    _access: 'TRUE'
+search_beverage.results:
+  path: '/search-beverage/search-results'
+  defaults:
+    _controller: '\Drupal\search_beverage\Controller\AjaxSearchResultsController::content'
+  requirements:
+    _access: 'TRUE'
